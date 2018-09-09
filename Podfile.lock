@@ -3,10 +3,12 @@ PODS:
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
   - SnapKit (4.0.0)
+  - Spring (1.0.5)
 
 DEPENDENCIES:
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - SnapKit
+  - Spring (from `https://github.com/MengTo/Spring.git`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -15,16 +17,22 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   ChameleonFramework:
     :git: https://github.com/ViccAlexander/Chameleon.git
+  Spring:
+    :git: https://github.com/MengTo/Spring.git
 
 CHECKOUT OPTIONS:
   ChameleonFramework:
     :commit: 6dd284bde21ea2e7f9fd89bc36f40df16e16369d
     :git: https://github.com/ViccAlexander/Chameleon.git
+  Spring:
+    :commit: c540239f3590bbaf4a35c3959c329dd5ed4e3eee
+    :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  Spring: 3c7666eccefdeb87140008dc81043f89f8dbb787
 
-PODFILE CHECKSUM: e117d91574cf30543a46049c806bb827fe34aa47
+PODFILE CHECKSUM: ecc38c7736bfb9c66282e612bc887630f2b8fd81
 
 COCOAPODS: 1.5.3

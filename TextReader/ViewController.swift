@@ -10,6 +10,9 @@ import UIKit
 import SnapKit
 import AVFoundation
 import ChameleonFramework
+import Spring
+
+
 
 class ViewController: UIViewController {
     
@@ -18,8 +21,8 @@ class ViewController: UIViewController {
     let synthesizer = AVSpeechSynthesizer()
     
     
-    let inputTextField: UITextField = {
-        let tf = UITextField()
+    let inputTextField: SpringTextField = {
+        let tf = SpringTextField()
         tf.placeholder = "Enter Some Text"
         tf.borderStyle = .roundedRect
         tf.backgroundColor = .white
@@ -27,23 +30,28 @@ class ViewController: UIViewController {
     }()
     
     
-    let readButton : UIButton = {
-        let button = UIButton(type: .system)
+    let readButton : SpringButton = {
+        let button = SpringButton(type: .system)
         button.setTitle("Read Text", for: .normal)
         button.backgroundColor = UIColor.flatGreen
         button.layer.cornerRadius = 5
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(speakAction), for: .touchUpInside)
+        button.shadow(with: .flatGray, opacity: 0.7, offset: CGSize(width: 0.5, height: 5), radius: 2)
+        button.animation = "pop"
+        button.curve = "easeIn"
+        button.duration = 1
         return  button
     }()
     
-    let repeatButton: UIButton = {
-        let button = UIButton(type: .system)
+    let repeatButton: SpringButton = {
+        let button = SpringButton(type: .system)
         button.setTitle("Repeat", for: .normal)
         button.backgroundColor = .gray
         button.layer.cornerRadius = 5
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(repeatSpeechAction), for: .touchUpInside)
+        button.shadow(with: .flatGray, opacity: 0.7, offset: CGSize(width: 0.5, height: 5), radius: 2)
         return  button
     }()
     
@@ -70,10 +78,24 @@ class ViewController: UIViewController {
         }
     }
     
+    fileprivate func handleTextFieldErrorAnimation() {
+        inputTextField.animation = "shake"
+        inputTextField.curve = "spring"
+        inputTextField.duration = 0.5
+        inputTextField.animate()
+    }
+    
+    fileprivate func handleOnPressButtonAnimation() {
+        
+    }
+    
     
     // handle speaking
     @objc func speakAction() {
-        guard let text = inputTextField.text, !text.isEmpty else { return }
+        guard let text = inputTextField.text, !text.isEmpty else {
+            handleTextFieldErrorAnimation()
+            return
+        }
         
         let utterance = AVSpeechUtterance(string: text)
         let voices : Voices = .english
@@ -87,6 +109,8 @@ class ViewController: UIViewController {
         }
         
         inputTextField.text = nil
+        
+
     }
 
     override func viewDidLoad() {
