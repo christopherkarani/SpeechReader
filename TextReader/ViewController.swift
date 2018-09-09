@@ -47,6 +47,12 @@ class ViewController: UIViewController {
         return  button
     }()
     
+    let commonWordsContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .yellow
+        return view
+    }()
+    
 
     
     var repeatText: String?
@@ -118,7 +124,11 @@ class ViewController: UIViewController {
         view.addSubview(inputTextField)
         view.addSubview(readButton)
         view.addSubview(repeatButton)
+        view.addSubview(commonWordsContainerView)
         
+        
+        
+        // input textFIeld contrainsts
         inputTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().offset(-50)
@@ -126,6 +136,7 @@ class ViewController: UIViewController {
             $0.height.equalTo(50)
         }
         
+        // read button constraints
         readButton.snp.makeConstraints {
             $0.top.equalTo(inputTextField.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
@@ -133,11 +144,20 @@ class ViewController: UIViewController {
             $0.height.equalTo(40)
         }
         
+        // repeat button constraints
         repeatButton.snp.makeConstraints {
             $0.top.equalTo(readButton.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(inputTextField.snp.width).multipliedBy(1.5/3)
             $0.height.equalTo(40)
+        }
+        
+        // common words container view constraints
+        commonWordsContainerView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(repeatButton.snp.bottom).offset(16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            $0.width.equalToSuperview().inset(14)
         }
         
     }
