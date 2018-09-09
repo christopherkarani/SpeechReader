@@ -7,6 +7,7 @@ target 'TextReader' do
 
   # Pods for TextReader
     pod 'SnapKit'
+    pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 
   target 'TextReaderTests' do
     inherit! :search_paths

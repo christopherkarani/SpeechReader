@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import AVFoundation
+import ChameleonFramework
 
 class ViewController: UIViewController {
     
@@ -29,19 +30,55 @@ class ViewController: UIViewController {
     let readButton : UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Read Text", for: .normal)
-        button.backgroundColor = .red
+        button.backgroundColor = UIColor.flatGreen
         button.layer.cornerRadius = 5
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(speakAction), for: .touchUpInside)
         return  button
     }()
     
+    let repeatButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Repeat", for: .normal)
+        button.backgroundColor = .gray
+        button.layer.cornerRadius = 5
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(repeatSpeechAction), for: .touchUpInside)
+        return  button
+    }()
     
-    @objc func speakAction() {
-        guard let text = inputTextField.text else { return }
+
+    
+    var repeatText: String?
+    
+    
+    // handle repeat action
+    @objc func repeatSpeechAction() {
+        guard let text = repeatText else { return }
         
         let utterance = AVSpeechUtterance(string: text)
+        let voices : Voices = .english
+        utterance.voice = AVSpeechSynthesisVoice(language: voices.language)
+        if !synthesizer.isSpeaking {
+            synthesizer.speak(utterance)
+        }
+    }
+    
+    
+    // handle speaking
+    @objc func speakAction() {
+        guard let text = inputTextField.text, !text.isEmpty else { return }
+        
+        let utterance = AVSpeechUtterance(string: text)
+        let voices : Voices = .english
+        utterance.voice = AVSpeechSynthesisVoice(language: voices.language)
         synthesizer.speak(utterance)
+        repeatText = text
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.repeatButton.backgroundColor = UIColor.flatRed
+            self.repeatButton.setTitleColor(.white, for: .normal)
+        }
         
         inputTextField.text = nil
     }
@@ -52,6 +89,7 @@ class ViewController: UIViewController {
         setupGestures()
         setupUIElements()
         setupKeyboardNotifications()
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -79,10 +117,11 @@ class ViewController: UIViewController {
     private func setupUIElements() {
         view.addSubview(inputTextField)
         view.addSubview(readButton)
+        view.addSubview(repeatButton)
         
         inputTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-50)
             $0.width.equalToSuperview().inset(14)
             $0.height.equalTo(50)
         }
@@ -94,13 +133,14 @@ class ViewController: UIViewController {
             $0.height.equalTo(40)
         }
         
+        repeatButton.snp.makeConstraints {
+            $0.top.equalTo(readButton.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(inputTextField.snp.width).multipliedBy(1.5/3)
+            $0.height.equalTo(40)
+        }
+        
     }
-    
-    
-
-    
-
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -128,8 +168,10 @@ extension ViewController {
     
     @objc func handleShowKeyboard(notification: Notification) {
         guard let dict = notification.userInfo else { return }
+        guard view.frame.origin.y == 0.0 else { return }
         let frame = dict["UIKeyboardFrameEndUserInfoKey"] as! CGRect
         let height = frame.height / 4
+        print(height)
         view.frame.origin.y -= height
         
     }
