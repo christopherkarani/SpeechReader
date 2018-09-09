@@ -38,9 +38,6 @@ class ViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(speakAction), for: .touchUpInside)
         button.shadow(with: .flatGray, opacity: 0.7, offset: CGSize(width: 0.5, height: 5), radius: 2)
-        button.animation = "pop"
-        button.curve = "easeIn"
-        button.duration = 1
         return  button
     }()
     
@@ -69,7 +66,7 @@ class ViewController: UIViewController {
     // handle repeat action
     @objc func repeatSpeechAction() {
         guard let text = repeatText else { return }
-        
+        animate(button: .repeat)
         let utterance = AVSpeechUtterance(string: text)
         let voices : Voices = .english
         utterance.voice = AVSpeechSynthesisVoice(language: voices.language)
@@ -85,8 +82,27 @@ class ViewController: UIViewController {
         inputTextField.animate()
     }
     
-    fileprivate func handleOnPressButtonAnimation() {
-        
+    /*
+     a helper enum for button selection
+ */
+    
+    enum ButtonType {
+        case read, `repeat`
+    }
+    
+    fileprivate func animate(button type: ButtonType) {
+        switch type {
+        case .read:
+            readButton.scaleX = 0.90
+            readButton.scaleY = 0.90
+            readButton.duration = 1
+            readButton.animate()
+        case .repeat:
+            repeatButton.scaleX = 0.90
+            repeatButton.scaleY = 0.90
+            repeatButton.duration = 1
+            repeatButton.animate()
+        }
     }
     
     
@@ -96,6 +112,9 @@ class ViewController: UIViewController {
             handleTextFieldErrorAnimation()
             return
         }
+        
+        animate(button: .read)
+        
         
         let utterance = AVSpeechUtterance(string: text)
         let voices : Voices = .english
