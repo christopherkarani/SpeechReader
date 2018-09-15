@@ -16,6 +16,7 @@
 		9E0449EB21443D7D001A36C9 /* TextReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0449EA21443D7D001A36C9 /* TextReaderTests.swift */; };
 		9E0449F9214525D6001A36C9 /* Voices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0449F8214525D6001A36C9 /* Voices.swift */; };
 		9E0449FB2145A8F7001A36C9 /* UIView_Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0449FA2145A8F7001A36C9 /* UIView_Ext.swift */; };
+		9E157716214D996F00555D04 /* TextReaderInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E157715214D996F00555D04 /* TextReaderInputView.swift */; };
 		A39FCC9AEE2CB0F2DD8B6664 /* Pods_TextReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D517715F448EDA2085BE9DDD /* Pods_TextReader.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		9E0449EC21443D7D001A36C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E0449F8214525D6001A36C9 /* Voices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voices.swift; sourceTree = "<group>"; };
 		9E0449FA2145A8F7001A36C9 /* UIView_Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView_Ext.swift; sourceTree = "<group>"; };
+		9E157715214D996F00555D04 /* TextReaderInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReaderInputView.swift; sourceTree = "<group>"; };
 		C75A655CFADCA420E0FD70EF /* Pods_TextReaderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextReaderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D517715F448EDA2085BE9DDD /* Pods_TextReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TextReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -102,6 +104,7 @@
 		9E0449D421443D7B001A36C9 /* TextReader */ = {
 			isa = PBXGroup;
 			children = (
+				9E157714214D996500555D04 /* Views */,
 				9E0449F7214525C6001A36C9 /* Utility */,
 				9E0449D521443D7B001A36C9 /* AppDelegate.swift */,
 				9E0449D721443D7B001A36C9 /* ViewController.swift */,
@@ -129,6 +132,14 @@
 				9E0449FA2145A8F7001A36C9 /* UIView_Ext.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		9E157714214D996500555D04 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9E157715214D996F00555D04 /* TextReaderInputView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		E2641EA7D458825EFAE9A5F8 /* Pods */ = {
@@ -307,6 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E157716214D996F00555D04 /* TextReaderInputView.swift in Sources */,
 				9E0449FB2145A8F7001A36C9 /* UIView_Ext.swift in Sources */,
 				9E0449D821443D7B001A36C9 /* ViewController.swift in Sources */,
 				9E0449D621443D7B001A36C9 /* AppDelegate.swift in Sources */,
