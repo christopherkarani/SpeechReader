@@ -70,13 +70,21 @@ final class TextReaderInputView: UIView {
     }
     
     fileprivate func setupUI() {
+        addSubview(inputTextField)
         addSubview(buttonsStackView)
+        
+        inputTextField.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview()
+            $0.width.equalToSuperview()
+            $0.height.equalTo(50)
+        }
         
         buttonsStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(inputTextField.snp.bottom).offset(20)
             $0.width.equalTo(inputTextField.snp.width)
-            $0.height.equalTo(50)
+            $0.height.equalTo(30)
         }
     }
     
